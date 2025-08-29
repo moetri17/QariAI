@@ -23,7 +23,7 @@ const ResultsScreen: React.FC = () => {
   const { levelId, levelTitleAr, totalItems, correctItems, bestStreak, durationMs, xpEarned, mistakes } = route.params;
 
   const accuracy = useMemo(() => (totalItems ? Math.round((correctItems / totalItems) * 100) : 0), [totalItems, correctItems]);
-  const timeStr = useMemo(() => formatDuration(durationMs), [durationMs]);
+  const timeStr = useMemo(() => formatDuration(durationMs || 0), [durationMs]);
 
   const handleBackToLevels = () => navigation.replace('Main');
   const handleRetryMistakes = () => navigation.replace('Practice', { level: levelId });

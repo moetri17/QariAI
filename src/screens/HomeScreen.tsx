@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { Text } from 'react-native-paper';
 import { useNavigation } from '@react-navigation/native';
-import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -24,9 +24,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import TutorialOverlay from '../tutorial/TutorialOverlay';
 import { useTutorial } from '../tutorial/TutorialContext';
 
-import type { TabParamList } from '../navigation/BottomTabs';
+import type { AppStackParamList } from '../navigation/AppNavigator';
 
 const { width } = Dimensions.get('window');
+
+type Nav = NativeStackNavigationProp<AppStackParamList>;
 
 const STORAGE_KEYS = {
   LAST_SESSION: 'qariai:last_session',
@@ -45,7 +47,7 @@ type LastSession =
   | null;
 
 const HomeScreen = () => {
-  const navigation = useNavigation<BottomTabNavigationProp<TabParamList>>();
+  const navigation = useNavigation<Nav>();
   const insets = useSafeAreaInsets();
   const { active, step, next } = useTutorial(); // tutorial state
 
@@ -89,21 +91,18 @@ const HomeScreen = () => {
   /** Resume last session or send user to Levels when none. */
   const goContinue = useCallback(() => {
     if (!lastSession) {
-      navigation.navigate('Levels' as never);
+      navigation.navigate('Levels');
       return;
     }
-    navigation.navigate('Practice' as never, {
-      mode: 'resume',
-      section: lastSession.section,
-      unitId: lastSession.unitId,
-      title: lastSession.title,
-    } as never);
+    navigation.navigate('Practice', {
+      level: parseInt(lastSession.unitId),
+    });
   }, [lastSession, navigation]);
 
   /** Entry into a section from the grid. */
   const startSection = useCallback(
     (section: 'Letters' | 'Words' | 'Verses') => {
-      navigation.navigate('Levels' as never, { focus: section } as never);
+      navigation.navigate('Levels');
     },
     [navigation]
   );
@@ -111,18 +110,16 @@ const HomeScreen = () => {
   /** Quick practice launcher (small, timed sets). */
   const startQuickPractice = useCallback(
     (id: string) => {
-      navigation.navigate('Practice' as never, {
-        mode: 'quick',
-        quickId: id,
-        limit: 3,
-      } as never);
+      navigation.navigate('Practice', {
+        level: 1,
+      });
     },
     [navigation]
   );
 
   /** Open analytics from header icon. */
   const openAnalytics = useCallback(() => {
-    navigation.navigate('Analytics' as never);
+    navigation.navigate('Analytics');
   }, [navigation]);
 
   const ProgressBar = ({ value }: { value: number }) => {
@@ -227,7 +224,7 @@ const HomeScreen = () => {
         <View style={styles.sectionHeaderRow}>
           <Text style={styles.sectionTitle}>⚡ Quick Practice</Text>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Practice' as never, { mode: 'quick' } as never)}
+            onPress={() => navigation.navigate('Practice', { level: 1 })}
           >
             <Text style={styles.linkText}>See all</Text>
           </TouchableOpacity>
@@ -321,10 +318,9 @@ const HomeScreen = () => {
           <TouchableOpacity
             style={styles.secondaryBtn}
             onPress={() =>
-              navigation.navigate('Practice' as never, {
-                mode: 'free',
-                limit: 4,
-              } as never)
+              navigation.navigate('Practice', {
+                level: 1,
+              })
             }
           >
             <Ionicons name="flash-outline" size={18} color="#1e3a8a" />
