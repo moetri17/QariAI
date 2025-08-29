@@ -21,7 +21,9 @@
     },
     "web": {},
     "plugins": [
-      "expo-font"
+      "expo-font",
+      "expo-audio",
+      "expo-sqlite"
     ]
   }
 }

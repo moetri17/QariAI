@@ -1,4 +1,3 @@
-// src/navigation/BottomTabs.tsx
 import React from 'react';
 import {
   Dimensions,
@@ -11,7 +10,6 @@ import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import LevelsScreen from '../screens/LevelsScreen';
 import ProfileScreen from '../screens/ProfileScreen';
-import PracticeScreen from '../screens/PracticeScreen';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 

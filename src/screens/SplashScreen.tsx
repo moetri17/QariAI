@@ -1,6 +1,5 @@
-// src/screens/SplashScreen.tsx
 import React, { useEffect } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { Text } from 'react-native-paper';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -12,7 +11,7 @@ const SplashScreen = () => {
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      navigation.replace('Main');
+      navigation.replace('Auth');
     }, 2000);
 
     return () => clearTimeout(timeout);

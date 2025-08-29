@@ -1,3 +1,11 @@
+// src/screens/LevelsScreen.tsx
+/**
+ * Screen: Levels
+ * Purpose: Roadmap of Letters/Words/Verses; launch specific level
+ * Tutorial: Shows overlay; Next → auto-open first Practice with { tutorial: true }
+ * Routes: Home → Levels → Practice
+ */
+
 import React from 'react';
 import {
   View,
@@ -13,12 +21,22 @@ import SectionHeader from '../components/SectionHeader';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { AppStackParamList } from '../navigation/AppNavigator';
+import TutorialOverlay from '../tutorial/TutorialOverlay';
+import { useTutorial } from '../tutorial/TutorialContext';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 const LevelsScreen = () => {
   const insets = useSafeAreaInsets();
   const navigation = useNavigation<NativeStackNavigationProp<AppStackParamList>>();
+  const { active, step, next } = useTutorial();
+
+  /** Go to the first level used in the tour (Letters Level 1). */
+  const goFirstPractice = () => {
+    // Advance tutorial to 'practice' before navigating
+    next();
+    navigation.navigate('Practice', { level: 1, tutorial: true } as any);
+  };
 
   return (
     <LinearGradient colors={['#e0f2ff', '#cce4f6']} style={styles.container}>
@@ -31,13 +49,14 @@ const LevelsScreen = () => {
         <Text style={styles.logo}>QariAI</Text>
 
         <SectionHeader icon="language-outline" title="Section 1: Letters" progress={0.45} />
-        
+
         <View style={styles.roadmapBubble}>
           <Text style={styles.levelLabel}>Level 1</Text>
+          <Text style={styles.difficultyText}>Easy</Text>
           <Text style={styles.levelDesc}>Learn the Arabic Alphabet</Text>
           <TouchableOpacity
             style={styles.levelButton}
-            onPress={() => navigation.navigate('Practice')}
+            onPress={() => navigation.navigate('Practice', { level: 1 } as any)}
           >
             <Text style={styles.buttonText}>Start</Text>
           </TouchableOpacity>
@@ -45,19 +64,39 @@ const LevelsScreen = () => {
 
         <View style={styles.connector} />
 
-        <SectionHeader icon="chatbox-ellipses-outline" title="Section 2: Words" progress={0.20}/>
+        <View style={styles.roadmapBubble}>
+          <Text style={styles.levelLabel}>Level 2</Text>
+          <Text style={styles.difficultyText}>Medium</Text>
+          <Text style={styles.levelDesc}>Letters with Harakat</Text>
+          <TouchableOpacity
+            style={styles.levelButton}
+            onPress={() => navigation.navigate('Practice', { level: 2 } as any)}
+          >
+            <Text style={styles.buttonText}>Start</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.connector} />
+
+        <SectionHeader icon="chatbox-ellipses-outline" title="Section 2: Words" progress={0.20} />
         <View style={styles.levelRow}>
           <View style={styles.roadmapBubbleSmall}>
-            <Text style={styles.levelLabel}>Level 2</Text>
+            <Text style={styles.levelLabel}>Level 3</Text>
             <Text style={styles.levelDescSmall}>Basic Words</Text>
-            <TouchableOpacity style={styles.levelButtonSmall}>
+            <TouchableOpacity
+              style={styles.levelButtonSmall}
+              onPress={() => navigation.navigate('Practice', { level: 3 } as any)}
+            >
               <Text style={styles.buttonText}>Go</Text>
             </TouchableOpacity>
           </View>
           <View style={styles.roadmapBubbleSmall}>
-            <Text style={styles.levelLabel}>Level 3</Text>
+            <Text style={styles.levelLabel}>Level 4</Text>
             <Text style={styles.levelDescSmall}>Daily Vocab</Text>
-            <TouchableOpacity style={styles.levelButtonSmall}>
+            <TouchableOpacity
+              style={styles.levelButtonSmall}
+              onPress={() => navigation.navigate('Practice', { level: 4 } as any)}
+            >
               <Text style={styles.buttonText}>Go</Text>
             </TouchableOpacity>
           </View>
@@ -65,15 +104,29 @@ const LevelsScreen = () => {
 
         <View style={styles.connector} />
 
-        <SectionHeader icon="musical-notes-outline" title="Section 3: Verses" progress={0.60}/>
-          <View style={styles.roadmapBubble}>
-          <Text style={styles.levelLabel}>Level 4</Text>
+        <SectionHeader icon="musical-notes-outline" title="Section 3: Verses" progress={0.60} />
+        <View style={styles.roadmapBubble}>
+          <Text style={styles.levelLabel}>Level 5</Text>
           <Text style={styles.levelDesc}>Short Surahs & Phrases</Text>
-          <TouchableOpacity style={styles.levelButton}>
+          <TouchableOpacity
+            style={styles.levelButton}
+            onPress={() => navigation.navigate('Practice', { level: 5 } as any)}
+          >
             <Text style={styles.buttonText}>Start</Text>
           </TouchableOpacity>
         </View>
       </ScrollView>
+
+      {/* Tutorial overlay for LEVELS: explain, Next → open Practice (Level 1) */}
+      <TutorialOverlay
+        visible={active && step === 'levels'}
+        title="Levels"
+        body="This is the Levels screen. Pick a level to begin. We'll open the first one for you."
+        primaryLabel="Next"
+        onPrimary={goFirstPractice}
+        secondaryLabel="Skip tour"
+        onSecondary={goFirstPractice}
+      />
     </LinearGradient>
   );
 };
@@ -129,6 +182,13 @@ const styles = StyleSheet.create({
     fontSize: SCREEN_WIDTH * 0.045,
     fontFamily: 'Tajawal-Bold',
     color: '#1e40af',
+  },
+  difficultyText: {
+    fontSize: SCREEN_WIDTH * 0.032,
+    fontFamily: 'Tajawal-Bold',
+    color: '#16a34a',
+    marginTop: 2,
+    marginBottom: SCREEN_HEIGHT * 0.005,
   },
   levelDesc: {
     fontSize: SCREEN_WIDTH * 0.035,
