@@ -1,9 +1,13 @@
-// src/tutorial/TutorialContext.tsx
 /**
- * Module: TutorialContext
- * Purpose: Manage guided tour across Home → Levels → Practice → Profile.
- * Storage: tutorialActive:<username>
+ * TutorialContext
+ * Central state for the guided tour across Home → Levels → Practice → Profile.
+ * - start(username): enables the tour and begins at Home.
+ * - next(): advances to the next step; markPracticeDone(): jumps to Profile after a successful submit.
+ * - finish(): ends the tour and clears persisted flags.
+ * Persistence: AsyncStorage keys per user (tutorialActive:<username>, tutorialStep:<username>).
+ * Usage: Wrap the app with <TutorialProvider/> and use `useTutorial()` in screens.
  */
+
 import React, { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -12,15 +16,10 @@ type Step = 'home' | 'levels' | 'practice' | 'profile' | 'done';
 type Ctx = {
   active: boolean;
   step: Step;
-  /** Start tutorial for given username. */
   start: (username: string) => Promise<void>;
-  /** Advance to next step manually (e.g., from Home/Levels/Profile). */
   next: () => void;
-  /** Mark practice step done (only after a successful recording submit). */
   markPracticeDone: () => void;
-  /** Finish tutorial and persist off. */
   finish: () => Promise<void>;
-  /** Current username (for persistence). */
   username: string | null;
   setUsername: (u: string | null) => void;
 };
@@ -42,7 +41,6 @@ export const TutorialProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   const [username, setUsername] = useState<string | null>(null);
 
   useEffect(() => {
-    // Auto-resume tutorial if flag exists for currentUser
     (async () => {
       const cur = await AsyncStorage.getItem('currentUser');
       if (cur) {
@@ -51,7 +49,6 @@ export const TutorialProvider: React.FC<{ children: React.ReactNode }> = ({ chil
         const flag = await AsyncStorage.getItem(`tutorialActive:${username.toLowerCase()}`);
         if (flag === '1') {
           setActive(true);
-          // When resuming, keep last step if stored (optional)
           const saved = await AsyncStorage.getItem(`tutorialStep:${username.toLowerCase()}`);
           setStep((saved as Step) || 'home');
         }

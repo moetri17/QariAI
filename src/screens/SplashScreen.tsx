@@ -1,3 +1,10 @@
+/**
+ * SplashScreen
+ * Initial launch screen of the app.
+ * - Shows the QariAI logo and slogan with a gradient background.
+ * - After 2 seconds automatically redirects to the Auth screen.
+ */
+
 import React, { useEffect } from 'react';
 import { StyleSheet} from 'react-native';
 import { useNavigation } from '@react-navigation/native';

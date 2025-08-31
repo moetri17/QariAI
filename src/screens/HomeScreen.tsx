@@ -1,9 +1,11 @@
-// src/screens/HomeScreen.tsx
 /**
- * Screen: Home
- * Purpose: Landing page with resume, quick practice, and section entry
- * Tutorial: Shows first overlay; Next → navigate to Levels
- * Routes: Home → Levels → Practice → Profile (tutorial-driven path)
+ * HomeScreen
+ * The landing page of the app.
+ * - Resume your last session or start learning from Levels.
+ * - See daily goal progress and streak at a glance.
+ * - Launch quick practice sets from the carousel.
+ * - Access Analytics from the header icon.
+ * - Shows the first step of the guided tutorial (then moves to Levels).
  */
 
 import React, { useEffect, useMemo, useState, useCallback } from 'react';

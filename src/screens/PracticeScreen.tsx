@@ -1,9 +1,12 @@
-// src/screens/PracticeScreen.tsx
 /**
- * Screen: Practice
- * Purpose: Record & submit per-item attempts; award XP; navigate within a level
- * Tutorial: When opened with { tutorial: true }, show overlay; on first successful send → Profile
- * Routes: Levels → Practice → (Results) → Profile (if tutorial)
+ * PracticeScreen
+ * Core practice flow for each level (e.g., letters/harakāt).
+ * - Plays a reference audio for the current item.
+ * - Lets the learner record, review, retry, and then “Send” an attempt.
+ * - Stores each attempt (with timing and outcome) and updates XP, streaks, and progress.
+ * - Shows instant visual feedback (flash + toast) and requires a send before moving on.
+ * - Final item completes the lesson and navigates to Results.
+ * - In the guided tour, the first successful send advances the tutorial.
  */
 
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
@@ -404,7 +407,6 @@ const PracticeScreen: React.FC = () => {
     return { correct: true, confidence: 0.99, durationMs: 1000 } as const;
   }, []);
 
-  /** Send attempt; if tutorial is active, advance to Profile after first success. */
   const handleSend = useCallback(async () => {
     if (!audioRecorder.uri) return;
     try {
@@ -478,7 +480,6 @@ const PracticeScreen: React.FC = () => {
         console.warn('Failed to preload user recording:', e);
       }
 
-      // --- Tutorial handoff: after first successful send, go to Profile.
       if (correct && active && step === 'practice') {
         markPracticeDone();
         navigation.navigate('Profile');
@@ -586,7 +587,6 @@ const PracticeScreen: React.FC = () => {
   const isLast = currentIndex === letters.length - 1;
   const canSend = hasRecording && !currentRecording?.sent;
 
-  // Tutorial overlay visibility: only when launched with { tutorial: true } and step is 'practice'
   const fromTutorial = !!route.params?.tutorial;
   const [practiceHintDismissed, setPracticeHintDismissed] = useState(false);
   const showPracticeTutorial = active && step === 'practice' && fromTutorial && !practiceHintDismissed;

@@ -1,3 +1,12 @@
+/**
+ * AppNavigator
+ * Defines the main navigation flow of the application using a stack navigator.
+ * Controls transitions between all core screens (Splash, Auth, Practice, Levels,
+ * Results, Analytics, Profile, and the main BottomTabs).
+ * Sets SplashScreen as the initial route and hides default headers for a
+ * custom app design.
+ */
+
 import React from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SplashScreen from '../screens/SplashScreen';

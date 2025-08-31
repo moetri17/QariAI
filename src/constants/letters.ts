@@ -1,3 +1,9 @@
+/**
+ * LETTERS Constant
+ * Provides an array of Arabic letters written in full words.
+ * Used as reference data for practice and display in the app.
+ */
+
 export const LETTERS = [
   { ar: "الف" },
   { ar: "باء" },

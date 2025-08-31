@@ -1,3 +1,10 @@
+/**
+ * BottomTabs
+ * Provides the app’s bottom navigation bar with icons for Home, Levels, and Profile.
+ * Uses a clean, label-free design, adapts height to the device’s safe area,
+ * and applies active/inactive colours for clear feedback.
+ */
+
 import React from 'react';
 import {
   Dimensions,

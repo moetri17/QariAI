@@ -1,3 +1,10 @@
+/**
+ * FeedbackFlash Component
+ * Displays a temporary colored flash overlay to give quick
+ * visual feedback (success, neutral, or error). The flash
+ * fades in and out automatically before disappearing.
+ */
+
 import React, { useEffect, useRef } from 'react';
 import { Animated, StyleSheet, Dimensions, View } from 'react-native';
 

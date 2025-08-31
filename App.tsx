@@ -1,3 +1,11 @@
+/**
+ * App Entry Point
+ * Wraps the whole app with:
+ *  - TutorialProvider: provides guided tour state.
+ *  - NavigationContainer: sets up navigation context.
+ * Loads AppNavigator to control screen flow.
+ */
+
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNavigator from './src/navigation/AppNavigator';

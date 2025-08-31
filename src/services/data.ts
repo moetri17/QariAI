@@ -1,3 +1,18 @@
+/**
+ * Data Service — Attempts & Progress (SQLite)
+ * Provides helper functions to save practice attempts and read analytics.
+ * Exports:
+ *  - recordAttempt(a): Save a single attempt (maps Arabic letter → letter id).
+ *  - getPerLetterStats(userId): Attempts, correct count, and accuracy per letter.
+ *  - getTotals(userId): Overall attempts, correct, and accuracy for the user.
+ *  - getLast7Days(userId): Daily counts/accuracy for the last 7 days.
+ *  - getLast7DaysForLetters(userId, letters): Same as above, filtered to given letters.
+ *  - getRecentAttempts(userId, limit): Latest attempts with target/predicted letters.
+ *  - computeAndUpdateLevel(userId): Computes level from thresholds and stores it.
+ *  - getCurrentLevel(userId): Reads the user’s current level.
+ * Notes: timestamps are stored in UTC ISO strings; boolean `correct` is saved as 0/1.
+ */
+
 import { db } from "../db/schema";
 
 export type NewAttempt = {

@@ -1,3 +1,10 @@
+/**
+ * Sparkline Component
+ * Renders a small line chart to show a quick visual trend of values.
+ * Scales the values to fit the given width and height, with a baseline
+ * and a blue line indicating changes over time.
+ */
+
 import React from 'react';
 import { View } from 'react-native';
 import { Svg, Polyline, Line } from 'react-native-svg';

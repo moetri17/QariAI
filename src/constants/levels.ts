@@ -1,3 +1,10 @@
+/**
+ * LEVELS Constant
+ * Defines the learning levels for the app.
+ * Each level has a number, name, and a set of Arabic letters.
+ * Later levels can be filled with additional content as needed.
+ */
+
 export const LEVELS: { level: number; name: string; letters: string[] }[] = [
     {
       level: 1,

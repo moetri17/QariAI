@@ -1,3 +1,11 @@
+/**
+ * SectionHeader Component
+ * Displays a section title with an icon and a progress bar.
+ * The progress bar shows completion as a percentage, along with
+ * a numeric value. The colour and icon can be customised.
+ * Used for marking progress within different learning sections.
+ */
+
 import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';

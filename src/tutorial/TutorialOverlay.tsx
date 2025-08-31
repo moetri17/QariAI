@@ -1,8 +1,12 @@
-// src/tutorial/TutorialOverlay.tsx
 /**
- * Component: TutorialOverlay
- * Purpose: Small modal overlay with message + primary/secondary CTA.
+ * TutorialOverlay
+ * A lightweight modal for guided tour steps.
+ * - Darkens the background and shows a card with title, body text, and CTAs.
+ * - Primary action button is required; optional secondary action can be shown.
+ * - Used by Home, Levels, Practice, and Profile screens to guide the user.
  */
+
+
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 

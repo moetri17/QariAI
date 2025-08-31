@@ -1,10 +1,12 @@
-// src/screens/AuthScreen.tsx
 /**
- * Screen: Auth
- * Purpose: Local username/pass auth; kick off multi-screen tutorial after sign-up
- * Routes: Auth → Main (Home shows first step)
- * Storage: users, currentUser, tutorialActive:<username>, tutorialStep:<username>
+ * AuthScreen
+ * Local sign-in / sign-up screen for the app.
+ * - Creates or logs in a user with a username + password (stored locally).
+ * - Passwords are SHA-256 hashed; current user is saved to AsyncStorage.
+ * - Validates usernames (3–20 chars: letters, numbers, underscore).
+ * - On first sign-up, starts the guided tutorial, then navigates to the main app.
  */
+
 import React, { useEffect, useState } from 'react';
 import {
   View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions,

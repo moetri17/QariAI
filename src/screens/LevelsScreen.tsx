@@ -1,9 +1,9 @@
-// src/screens/LevelsScreen.tsx
 /**
- * Screen: Levels
- * Purpose: Roadmap of Letters/Words/Verses; launch specific level
- * Tutorial: Shows overlay; Next → auto-open first Practice with { tutorial: true }
- * Routes: Home → Levels → Practice
+ * LevelsScreen
+ * Roadmap view of the curriculum: Letters, Words, and Verses.
+ * - Shows section headers with progress and level “bubbles”.
+ * - Tap a level to start practice (e.g., Level 1 → Practice).
+ * - In the guided tour, this screen explains levels; Next opens Level 1.
  */
 
 import React from 'react';
@@ -31,9 +31,7 @@ const LevelsScreen = () => {
   const navigation = useNavigation<NativeStackNavigationProp<AppStackParamList>>();
   const { active, step, next } = useTutorial();
 
-  /** Go to the first level used in the tour (Letters Level 1). */
   const goFirstPractice = () => {
-    // Advance tutorial to 'practice' before navigating
     next();
     navigation.navigate('Practice', { level: 1, tutorial: true } as any);
   };
@@ -117,7 +115,6 @@ const LevelsScreen = () => {
         </View>
       </ScrollView>
 
-      {/* Tutorial overlay for LEVELS: explain, Next → open Practice (Level 1) */}
       <TutorialOverlay
         visible={active && step === 'levels'}
         title="Levels"

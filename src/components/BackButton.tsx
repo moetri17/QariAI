@@ -1,3 +1,11 @@
+/**
+ * BackButton Component
+ * Displays a back button in the top-left corner of the screen.
+ * When pressed, it takes the user back to the previous screen,
+ * or to a fallback page if no previous screen exists.
+ * The icon and button style can be customised.
+ */
+
 import React from 'react';
 import { Pressable, StyleSheet, ViewStyle } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

@@ -1,9 +1,10 @@
-// src/screens/ProfileScreen.tsx
 /**
- * Screen: Profile
- * Purpose: View user info, analytics link, notifications prefs, logout/delete
- * Tutorial: Final step — explains logout/analytics; Finish → end tour + go Home
- * Routes: Practice (from tutorial) → Profile → Home
+ * ProfileScreen
+ * Shows the user’s account and preferences.
+ * - View username and open Analytics.
+ * - Set study reminders (frequency, time) and toggle notifications.
+ * - Log out or permanently delete the local account and data.
+ * - Final step of the guided tour (Finish returns to Home).
  */
 
 import React, { useEffect, useState } from 'react';

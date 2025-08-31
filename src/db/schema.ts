@@ -1,5 +1,14 @@
-import * as SQLite from "expo-sqlite";
+/**
+ * Local Database Setup (SQLite)
+ * Defines the app’s on-device database and applies schema updates.
+ * Creates tables for users, letters, practice attempts, levels, and user progress.
+ * On first run, seeds the canonical Arabic letters and default level thresholds.
+ * Stores practice attempts (target/predicted letter, correct flag, confidence,
+ * duration, audio URI) with timestamps for offline use and privacy.
+ * Usage: call runMigrations() once at app startup to ensure the database is ready.
+ */
 
+import * as SQLite from "expo-sqlite";
 export const db = SQLite.openDatabaseSync("qariai.db");
 
 const CANON_LETTERS = [

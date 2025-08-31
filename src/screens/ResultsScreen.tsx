@@ -1,3 +1,11 @@
+/**
+ * ResultsScreen
+ * Shows a clear summary after completing a level:
+ *  - Accuracy, correct count, time taken, best streak, and XP earned.
+ *  - Any mistaken items are listed for quick review.
+ *  - Actions: practise again or return to Home.
+ */
+
 import React, { useMemo } from 'react';
 import { View, Text, StyleSheet, Dimensions, Platform, TouchableOpacity, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';

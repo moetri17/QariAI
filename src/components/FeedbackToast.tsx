@@ -1,3 +1,12 @@
+/**
+ * FeedbackToast Component
+ * Shows a small temporary message (“toast”) near the bottom of the screen.
+ * Uses colour and an icon to indicate success, info, or error.
+ * Appears briefly (slides in, then fades out) and can auto-hide after a set time.
+ * Accepts a title and optional subtitle; calls onHide when it disappears.
+ */
+
+
 import React, { useEffect, useRef } from 'react';
 import { Animated, View, Text, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';

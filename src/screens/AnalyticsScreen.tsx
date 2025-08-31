@@ -1,3 +1,13 @@
+/**
+ * AnalyticsScreen
+ * Presents the learner’s performance in a clear dashboard:
+ *  - Overall attempts and accuracy, plus per-level summary and last-7-days trend.
+ *  - Per-letter accuracy bars filtered by the selected level.
+ *  - Pull-to-refresh to recompute stats and level progression.
+ *  - Export options to share results as CSV or PDF (local generation for privacy).
+ * Intended to help users and markers see progress at a glance.
+ */
+
 import * as React from 'react';
 import {
   View, Text, FlatList, StyleSheet, RefreshControl, TouchableOpacity, Alert,
