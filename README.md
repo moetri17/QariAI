@@ -15,7 +15,7 @@ Make sure you have the following installed:
 * [Expo CLI](https://docs.expo.dev/get-started/installation/)
 
   ```bash
-npx create-expo-app@latest
+  npx create-expo-app@latest
   ```
 * An emulator/simulator or the **Expo Go** app installed on your Android/iOS device.
 
