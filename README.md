@@ -1,7 +1,7 @@
 # QariAI Project Repository
 
 This repository contains the full codebase and scripts developed for the **QariAI MSc Dissertation Project**.  
-It is organised into two main components: the mobile learning application and the AI scripts for training and evaluation.
+It is organised into two main components: the mobile learning application and the AI Models for training and evaluation.
 
 ---
 
@@ -17,8 +17,8 @@ A React Native (Expo + TypeScript) mobile app that delivers:
 
 ---
 
-## 🤖 AI Scripts
-**Path:** [`AI Scripts/`](./AI%20Scripts)
+## 🤖 AI Models
+**Path:** [`AI Models/`](./AI%20Models)
 
 Python scripts and Jupyter/Colab notebooks used to develop and evaluate the ASR models:
 - Dataset loading and preprocessing
@@ -37,7 +37,7 @@ QariAI/
 ├── Mobile Application/    # Mobile app source code (React Native, TypeScript)
 │   └── README.md          # Setup and usage instructions for the app
 │
-├── AI Scripts/            # Model training, evaluation, and demo scripts
+├── AI Models/            # Model training, evaluation, and demo scripts
 │   └── (notebooks, .py files, etc.)
 │
 └── README.md              # Project overview (this file)
